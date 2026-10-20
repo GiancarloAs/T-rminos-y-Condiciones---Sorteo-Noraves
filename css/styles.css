@@ -1,0 +1,358 @@
+/* =========================================================
+   NORAVES · Bases legales
+   Cambia los colores en :root para ajustarlos a la paleta oficial.
+   ========================================================= */
+
+/* Androgyne: si tienes la fuente, copia el archivo a /fonts/Androgyne.woff2
+   (o .otf/.ttf) y se usará automáticamente. Si no está, entra Playfair Display. */
+@font-face {
+  font-family: "Androgyne";
+  src: local("Androgyne"),
+       url("../fonts/Androgyne.woff2") format("woff2"),
+       url("../fonts/Androgyne.otf") format("opentype"),
+       url("../fonts/Androgyne.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Paleta oficial Noraves (colores primarios) */
+  --azul: #0d11b5;         /* azul principal */
+  --azul-oscuro: #060970;  /* azul oscuro */
+  --naranja: #ffa700;
+  --amarillo: #ffd300;
+  --papel: #ffffff;        /* fondo */
+  --tinta: #1d1d1d;        /* texto */
+  --tinta-suave: #55555f;
+  --linea: #e4e4ee;
+  --campo: #fff1b8;        /* resaltado de campos por completar */
+
+  /* Tipografías */
+  --f-titulo: "Androgyne", "Playfair Display", Georgia, serif;
+  --f-texto: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-script: "Segoe Script", "Caveat", "Brush Script MT", cursive;
+
+  --ancho: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-padding-top: 24px; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--f-texto);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.skip {
+  position: absolute; left: -999px; top: 8px;
+  background: var(--tinta); color: #fff; padding: 8px 14px; border-radius: 6px; z-index: 100;
+}
+.skip:focus { left: 8px; }
+
+a:focus-visible, .skip:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   BARRA DE MARCA
+   ========================================================= */
+.brandbar {
+  background: var(--azul-oscuro);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: center;
+}
+.brandbar img { display: block; height: 34px; width: auto; }
+@media (min-width: 769px) {
+  .brandbar { padding: 16px 48px; justify-content: flex-start; }
+  .brandbar img { height: 40px; }
+}
+
+/* =========================================================
+   PORTADA
+   PC:      1920 x 720 px  -> img/portada-pc.jpg
+   Celular: 1080 x 1350 px -> img/portada-movil.jpg
+   ========================================================= */
+.cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 720;
+  background-color: var(--azul);
+  background-image: url("../img/portada-pc.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover__hint {
+  display: none;               /* solo visible mientras no exista la imagen */
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  border: 2px dashed rgba(255, 255, 255, .7);
+  border-radius: 10px;
+  padding: 10px 18px;
+  text-align: center;
+}
+.cover.no-img .cover__hint { display: block; }
+.hint-mobile { display: none; }
+
+@media (max-width: 768px) {
+  .cover {
+    aspect-ratio: 1080 / 1350;
+    background-image: url("../img/portada-movil.jpg");
+  }
+  .hint-pc { display: none; }
+  .hint-mobile { display: inline; }
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+.intro {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 64px 24px 24px;
+}
+
+.intro__script {
+  margin: 0 0 4px;
+  font-family: var(--f-script);
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  line-height: 1.2;
+  color: var(--azul);
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+}
+
+.intro h1 {
+  margin: 0;
+  font-family: var(--f-titulo);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.intro__lead {
+  max-width: 56ch;
+  margin: 20px 0 0;
+  color: var(--tinta-suave);
+  font-size: 1.05rem;
+}
+
+/* =========================================================
+   LAYOUT: índice + contenido
+   ========================================================= */
+.layout {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 32px 24px 96px;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+/* Índice */
+.toc {
+  position: sticky;
+  top: 24px;
+  border-left: 3px solid var(--linea);
+}
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc a {
+  display: block;
+  padding: 7px 0 7px 16px;
+  margin-left: -3px;
+  border-left: 3px solid transparent;
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color .2s, border-color .2s;
+}
+.toc a:hover { color: var(--azul); }
+.toc a.is-active {
+  color: var(--azul);
+  border-left-color: var(--azul);
+  font-weight: 600;
+}
+
+/* Secciones */
+.bases section {
+  padding: 8px 0 36px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid var(--linea);
+}
+.bases section:last-child { border-bottom: 0; margin-bottom: 0; }
+
+.bases h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 14px;
+  font-family: var(--f-titulo);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  line-height: 1.2;
+}
+.bases .n {
+  flex: none;
+  min-width: 2.1rem;
+  height: 2.1rem;
+  padding: 0 8px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--azul);
+  color: #fff;
+  font-family: var(--f-texto);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-style: italic;
+  transform: translateY(-2px);
+}
+
+.bases p { margin: 0 0 12px; max-width: 68ch; }
+
+.bases ul {
+  margin: 0;
+  padding-left: 1.2em;
+  max-width: 68ch;
+}
+.bases li { margin-bottom: 10px; }
+.bases li::marker { color: var(--azul); }
+
+/* Pasos (sí es una secuencia real) */
+.steps {
+  list-style: none;
+  counter-reset: paso;
+  margin: 16px 0 0;
+  padding: 0;
+  max-width: 68ch;
+}
+.steps > li {
+  counter-increment: paso;
+  position: relative;
+  padding: 18px 20px 18px 64px;
+  margin-bottom: 12px;
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+}
+.steps > li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--amarillo);
+  color: var(--tinta);
+  font-weight: 700;
+}
+.steps ul { margin-top: 10px; }
+
+/* Campos por completar: quitar la clase "fill" del <mark> cuando se llenen */
+mark.fill {
+  background: var(--campo);
+  color: inherit;
+  padding: 1px 6px;
+  border-radius: 5px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+  background: var(--azul-oscuro);
+  color: #fff;
+  text-align: center;
+  padding: 56px 24px;
+}
+.footer__slogan {
+  margin: 0 0 12px;
+  font-family: var(--f-titulo);
+  font-weight: normal;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  line-height: 1.15;
+  color: var(--naranja);
+}
+.footer__legal {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, .8);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  /* Índice pasa a barra horizontal pegada arriba */
+  .toc {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    margin: 0 -24px;
+    padding: 0 24px;
+    border-left: 0;
+    background: rgba(255, 253, 249, .96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--linea);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toc::-webkit-scrollbar { display: none; }
+  .toc ol { display: flex; gap: 6px; white-space: nowrap; }
+  .toc a {
+    padding: 14px 10px;
+    margin: 0;
+    border-left: 0;
+    border-bottom: 3px solid transparent;
+  }
+  .toc a.is-active { border-bottom-color: var(--azul); }
+
+  .bases { padding-top: 24px; }
+}
+
+@media (max-width: 560px) {
+  .intro { padding-top: 40px; }
+  .steps > li { padding: 16px 16px 16px 56px; }
+  .steps > li::before { left: 14px; }
+}
+
+@media print {
+  .cover, .toc, .skip { display: none; }
+  .layout { display: block; padding: 0; }
+  .footer { background: none; color: #000; }
+}

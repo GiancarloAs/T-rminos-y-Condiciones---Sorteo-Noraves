@@ -1,0 +1,19 @@
+NORAVES - Bases legales (landing)
+
+ESTRUCTURA
+  index.html
+  css/styles.css
+  js/main.js
+  img/portada-pc.jpg      -> 1920 x 720 px   (zona segura central 1200 x 720)
+  img/portada-movil.jpg   -> 1080 x 1350 px  (4:5, zona segura 900 x 1150 centrada)
+  fonts/Androgyne.woff2   -> opcional (o .otf / .ttf con el mismo nombre)
+
+PASOS
+  1. Coloca las portadas en /img con esos nombres exactos.
+  2. (Opcional) Coloca Androgyne en /fonts. Sin ella se usa Playfair Display.
+  3. Completa los campos amarillos en index.html: son los <mark class="fill">[...]</mark>.
+     Al llenarlos, borra la clase "fill" para quitar el resaltado.
+  4. Sube la carpeta completa a tu hosting (el QR apuntara a la URL de index.html).
+
+COLORES
+  Cambia las variables al inicio de css/styles.css (--azul, --azul-oscuro, --naranja, --amarillo).
